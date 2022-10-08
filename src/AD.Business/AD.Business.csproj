@@ -7,11 +7,20 @@
 
     <ItemGroup>
       <PackageReference Include="MediatR" Version="11.0.0" />
+      <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.9" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Features" />
+      <Reference Include="Microsoft.Extensions.Configuration.Abstractions">
+        <HintPath>..\..\..\..\.nuget\packages\microsoft.extensions.configuration.abstractions\6.0.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\AD.Business.Services\AD.Business.Services.csproj" />
+      <ProjectReference Include="..\AD.Commons\AD.Commons.csproj" />
+      <ProjectReference Include="..\AD.Persistence.DataAccess\AD.Persistence.DataAccess.csproj" />
     </ItemGroup>
 
 </Project>
