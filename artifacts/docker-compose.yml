@@ -1,0 +1,13 @@
+version: "3.9"
+
+services: 
+  web-api: 
+    build: ..
+    ports: 
+      - "5188"
+  database: 
+    image: "mcr.microsoft.com/mssql/server"
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "qy8A2vf7YmmAt7PK"
+      MSSQL_PID: "autodock_dev"
