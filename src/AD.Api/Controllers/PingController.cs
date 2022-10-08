@@ -1,3 +1,5 @@
+using AD.Business.Features.Ping;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AD.Api.Controllers;
@@ -6,9 +8,16 @@ namespace AD.Api.Controllers;
 [Route("[controller]")]
 public class PingController:ControllerBase
 {
-    [HttpGet]
-    public async Task<IActionResult> Get([FromRoute] string parameter)
+    private readonly IMediator _mediator;
+    public PingController(IMediator mediator)
     {
-        return await Task.FromResult<IActionResult>(Ok(parameter));
+        _mediator = mediator;
+    }
+    
+    [HttpGet]
+    public async Task<IActionResult> Get([FromQuery]string p)
+    {
+        var res = await _mediator.Send(new PingCommand(p));
+        return res.Success ? Ok(res.Data) : BadRequest(res.Message);
     }
 }

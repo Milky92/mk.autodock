@@ -5,13 +5,13 @@ using System.Net;
 namespace AD.Commons;
 
 /// <summary>
-/// Response descriptor.
+/// Default response descriptor.
 /// </summary>
 public class Result
 {
-    public Result() { }
+    protected Result() { }
 
-    public Result(int statusCode, bool success, string message)
+    private Result(int statusCode, bool success, string message)
     {
         Success = success;
         Message = message;
@@ -42,7 +42,9 @@ public class Result<TData> : Result
     public TData Data { get; private set; }
 
 
-    public static Result<TData> Ok(TData data) => new Result<TData>().SetData(data).SetStatusCode(200);
+    public static Result<TData> Ok(TData data) => new Result<TData>().SetData(data)
+        .SetSuccess(true)
+        .SetStatusCode(200);
 
     public static Result<TData> Created() =>
         new Result<TData>()
