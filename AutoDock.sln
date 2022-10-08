@@ -7,7 +7,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "artifacts", "artifacts", "{652E1AE7-7DA3-4C8E-B863-E97E4361AF7A}"
 	ProjectSection(SolutionItems) = preProject
 		artifacts\docker-compose.yml = artifacts\docker-compose.yml
-		artifacts\.DOCKERFILE = artifacts\.DOCKERFILE
 		artifacts\entrypoint.sh = artifacts\entrypoint.sh
 	EndProjectSection
 EndProject
