@@ -5,12 +5,4 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
-    <ItemGroup>
-      <Folder Include="Internals" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <PackageReference Include="MediatR" Version="11.0.0" />
-    </ItemGroup>
-
 </Project>
