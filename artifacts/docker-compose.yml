@@ -1,13 +1,28 @@
 version: "3.9"
-
+#name: AutoDock
+volumes: 
+  mssql-server-linux-data:
 services: 
   web-api: 
-    build: ..
+    build:
+      context: ../
+      dockerfile: ./artifacts/DockerFile
+    container_name: web-api
+    restart: "unless-stopped"
+    depends_on: 
+      - database
     ports: 
       - "5188"
   database: 
     image: "mcr.microsoft.com/mssql/server"
+    user: root
+    container_name: sql-server-db
+    restart: unless-stopped
+    volumes:
+      - mssql-server-linux-data:/var/opt/mssql/data
     environment:
       ACCEPT_EULA: "Y"
-      MSSQL_SA_PASSWORD: "qy8A2vf7YmmAt7PK"
-      MSSQL_PID: "autodock_dev"
+      MSSQL_SA_PASSWORD: "Pass@word"
+      MSSQL_PID: "Developer"
+    ports:
+      - "5434:1433"

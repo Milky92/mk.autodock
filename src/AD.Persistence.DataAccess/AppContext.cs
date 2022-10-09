@@ -1,3 +1,4 @@
+using AD.Persistence.DataAccess.Seed;
 using AD.Persistence.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,8 +18,11 @@ public class AppContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.HasDefaultSchema("public");
+        modelBuilder.HasDefaultSchema("db_public");
         
         modelBuilder.Setup(this);
+        
+        modelBuilder.Seed();
     }
+    
 }
