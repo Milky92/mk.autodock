@@ -8,6 +8,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "artifacts", "artifacts", "{
 	ProjectSection(SolutionItems) = preProject
 		artifacts\docker-compose.yml = artifacts\docker-compose.yml
 		artifacts\entrypoint.sh = artifacts\entrypoint.sh
+		artifacts\DockerFile = artifacts\DockerFile
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AD.Api", "src\AD.Api\AD.Api.csproj", "{1F8F4192-042D-42CE-BD55-B418FD19ED2D}"
