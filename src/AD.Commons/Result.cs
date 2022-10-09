@@ -29,29 +29,28 @@ public class Result
     public static Result Ok() => New(200, true, string.Empty);
     public static Result Created() => New(201, true, string.Empty);
     public static Result NoContext() => New(204, true, default);
-    public static Result Failure(string message) => New(500, false, message);
-    public static Result Failure(int statusCode, string message) => New(statusCode, false, message);
+    public static Result Fail(string message) => New(500, false, message);
+    public static Result Fail(int statusCode, string message) => New(statusCode, false, message);
 }
 
 /// <summary>
 /// Parametrize response descriptor. Use static methods for describe http responses.
 /// </summary>
 /// <typeparam name="TData">Data bag</typeparam>
-public class Result<TData> : Result
+public class Result<TData> :Result
 {
     public TData Data { get; private set; }
-
-
+    
     public static Result<TData> Ok(TData data) => new Result<TData>().SetData(data)
         .SetSuccess(true)
         .SetStatusCode(200);
 
-    public static Result<TData> Created() =>
+    public static new Result<TData> Created() =>
         new Result<TData>()
             .SetSuccess(true)
             .SetStatusCode(201);
     
-    public static Result<TData> NoContent() =>
+    public static Result<TData> Updated() =>
         new Result<TData>()
             .SetSuccess(true)
             .SetStatusCode(204);
@@ -65,54 +64,20 @@ public class Result<TData> : Result
             .SetMessage(message)
             .SetStatusCode(400);
 
-    public static Result<TData> NotAuthorized() =>
-        new Result<TData>()
-            .SetStatusCode(401);
-
-    public static Result<TData> NotAuthorized(string message) =>
-        new Result<TData>()
-            .SetMessage(message)
-            .SetStatusCode(401);
-
-    public static Result<TData> Forbidden() =>
-        new Result<TData>()
-            .SetStatusCode(403);
-
-    public static Result<TData> Forbidden(string message) =>
-        new Result<TData>()
-            .SetMessage(message)
-            .SetStatusCode(403);
-
+    
     public static Result<TData> NotFound(string message) =>
         new Result<TData>()
             .SetMessage(message)
             .SetStatusCode(404);
-
-    public static Result<TData> NotAllowed() =>
-        new Result<TData>()
-            .SetStatusCode(405);
-
-    public static Result<TData> NotAllowed(string message) =>
-        new Result<TData>()
-            .SetSuccess(false)
-            .SetMessage(message)
-            .SetStatusCode(405);
-
-    public static Result<TData> InternalError() => new Result<TData>()
+    
+    public static new Result<TData> Fail() => new Result<TData>()
         .SetStatusCode(500);
 
-    public static Result<TData> InternalError(string message) => new Result<TData>()
+    public static new Result<TData> Fail(string message) => new Result<TData>()
         .SetStatusCode(500)
         .SetMessage(message);
-
-    public static Result<TData> NotImplemented() => new Result<TData>()
-        .SetStatusCode(501);
-
-    public static Result<TData> NotImplemented(string message) => new Result<TData>()
-        .SetStatusCode(501)
-        .SetMessage(message);
-
-
+    
+    
     #region fluent setters
 
     private Result<TData> SetData(TData data)
@@ -126,8 +91,8 @@ public class Result<TData> : Result
         Message = message;
         return this;
     }
-
-    private Result<TData> SetSuccess(bool success)
+    
+    protected Result<TData> SetSuccess(bool success)
     {
         Success = success;
         return this;

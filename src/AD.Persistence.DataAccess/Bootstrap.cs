@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace AD.Persistence.DataAccess;
 
-public static class BootstrapDataAccess
+public static class Bootstrap
 {
     private const string section = "Default";
     
