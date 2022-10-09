@@ -1,5 +1,5 @@
 version: "3.9"
-name: AutoDock
+#name: AutoDock
 volumes: 
   mssql-server-linux-data:
 services: 
@@ -9,7 +9,8 @@ services:
       dockerfile: ./artifacts/DockerFile
     container_name: web-api
     restart: "unless-stopped"
-    depends_on: database
+    depends_on: 
+      - database
     ports: 
       - "5188"
   database: 
@@ -23,3 +24,5 @@ services:
       ACCEPT_EULA: "Y"
       MSSQL_SA_PASSWORD: "qy8A2vf7YmmAt7PK"
       MSSQL_PID: "Developer"
+    ports:
+      - "5434:1433"

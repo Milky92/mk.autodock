@@ -3,6 +3,7 @@ WORKDIR /app
 COPY ./src/ .
 COPY ./artifacts/entrypoint.sh .
 RUN chmod +x ./entrypoint.sh
+RUN dotnet restore ./AD.Api
 RUN dotnet build ./AD.Api
 RUN dotnet publish ./AD.Api -c release --runtime linux-x64
 RUN dotnet tool install --global dotnet-ef
