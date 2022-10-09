@@ -6,11 +6,11 @@ namespace AD.Persistence.DataAccess;
 
 public static class EntitySetupExtension
 {
-    public static ModelBuilder Setup(this ModelBuilder modelBuilder, AppContext context)
+    public static ModelBuilder Setup(this ModelBuilder modelBuilder, AppDbContext context)
         => modelBuilder.SetupBusinessTask(context)
             .SetupBusinessTaskAttachment(context);
 
-    private static ModelBuilder SetupBusinessTask(this ModelBuilder modelBuilder, AppContext context)
+    private static ModelBuilder SetupBusinessTask(this ModelBuilder modelBuilder, AppDbContext context)
     {
         modelBuilder.Entity<BusinessTask>().HasKey(t => t.Id);
         modelBuilder.Entity<BusinessTask>().Property(x => x.Status);
@@ -18,7 +18,7 @@ public static class EntitySetupExtension
         return modelBuilder;
     }
 
-    private static ModelBuilder SetupBusinessTaskAttachment(this ModelBuilder modelBuilder, AppContext context)
+    private static ModelBuilder SetupBusinessTaskAttachment(this ModelBuilder modelBuilder, AppDbContext context)
     {
         modelBuilder.Entity<BusinessTask>().OwnsMany(entity => entity.Attachments, builder =>
         {

@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AD.Persistence.DataAccess;
 
-public class AppContext : DbContext
+public class AppDbContext : DbContext
 {
-    public AppContext(DbContextOptions options) : base(options)
+    public AppDbContext(DbContextOptions options) : base(options)
     {
     }
     

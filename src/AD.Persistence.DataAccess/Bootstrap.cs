@@ -10,7 +10,7 @@ public static class Bootstrap
     
     public static IServiceCollection BootstrapDbContext(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDbContext<AppContext>(op =>
+        services.AddDbContext<AppDbContext>(op =>
         {
             op.UseSqlServer(configuration.GetConnectionString(section));
             op.EnableThreadSafetyChecks();
