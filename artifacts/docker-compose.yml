@@ -22,7 +22,7 @@ services:
       - mssql-server-linux-data:/var/opt/mssql/data
     environment:
       ACCEPT_EULA: "Y"
-      MSSQL_SA_PASSWORD: "qy8A2vf7YmmAt7PK"
+      MSSQL_SA_PASSWORD: "Pass@word"
       MSSQL_PID: "Developer"
     ports:
       - "5434:1433"
