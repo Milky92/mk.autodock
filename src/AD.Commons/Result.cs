@@ -28,7 +28,9 @@ public class Result
     
     public static Result Ok() => New(200, true, string.Empty);
     public static Result Created() => New(201, true, string.Empty);
-    public static Result NoContext() => New(204, true, default);
+    public static Result Updated() => New(204, true, default);
+    
+    public static Result NotFound(string message) => New(404, false, message);
     public static Result Fail(string message) => New(500, false, message);
     public static Result Fail(int statusCode, string message) => New(statusCode, false, message);
 }

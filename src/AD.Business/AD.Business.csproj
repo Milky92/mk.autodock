@@ -13,6 +13,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Reference Include="Microsoft.AspNetCore.Http.Features">
+        <HintPath>..\..\..\..\..\..\usr\lib\dotnet\dotnet6-6.0.109\shared\Microsoft.AspNetCore.App\6.0.9\Microsoft.AspNetCore.Http.Features.dll</HintPath>
+      </Reference>
       <Reference Include="Microsoft.Extensions.Configuration.Abstractions">
         <HintPath>..\..\..\..\.nuget\packages\microsoft.extensions.configuration.abstractions\6.0.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
       </Reference>
@@ -25,12 +28,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Features\DeleteBusinessTask" />
-      <Folder Include="Features\DetailsBusinessTask" />
       <Folder Include="Features\GetFile" />
       <Folder Include="Features\GetFiles" />
-      <Folder Include="Features\ListBusinessTask" />
-      <Folder Include="Features\UpdateBusinessTask" />
     </ItemGroup>
 
 </Project>
