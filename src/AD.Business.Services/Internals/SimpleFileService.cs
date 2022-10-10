@@ -54,7 +54,7 @@ public class SimpleFileService : IFileService
 
     public async Task<(string, Stream)> GetFile(string fileName, CancellationToken token)
     {
-        throw new NotImplementedException();
+        return (default, default);
     }
 
     private string GetPath(string fileName) => Path.Combine(_fileStorageSettings.PathToUpload, fileName);
