@@ -28,7 +28,6 @@ public class AttachmentsController:ControllerBase
     public async Task<IActionResult> Page(PageContext<AttachmentListFilter> context,CancellationToken token)
     {
         var res = await _mediator.Send(new GetAttachmentListQuery(context), token);
-
         return StatusCode(res.StatusCode, res);
     }
 
