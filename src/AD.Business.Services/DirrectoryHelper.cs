@@ -7,10 +7,8 @@ public static class DirectoryHelper
         if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
 
         if (Directory.Exists(path))
-        {
-            return false;
-        }
-
+            return true;
+        
         var r = Directory.CreateDirectory(path);
         return r.Exists;
     }

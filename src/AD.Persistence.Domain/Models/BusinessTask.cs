@@ -9,5 +9,5 @@ public class BusinessTask : EntityBase
     [StringLength(55)] public string Name { get; set; }
     public BusinessTaskStatus Status { get; set; }
     
-    public virtual ICollection<BusinessTaskAttachment> Attachments { get; set; }
+    public ICollection<BusinessTaskAttachment> Attachments { get; set; }
 }
