@@ -4,8 +4,8 @@ namespace AD.Business.Services;
 
 public interface IFileService
 {
-    Task<List<string>> SaveRange(IFormFileCollection files, CancellationToken token);
-
+    Task<bool> SaveRange(IFormFileCollection files, CancellationToken token);
+    
     Task<string> SaveSingle(IFormFile file, CancellationToken token);
 
     /// <summary>
