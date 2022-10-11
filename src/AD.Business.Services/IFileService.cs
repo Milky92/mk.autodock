@@ -19,4 +19,5 @@ public interface IFileService
     Task<bool> DeleteFile(string fileName, CancellationToken token);
 
     Task<bool> DeleteRange(IEnumerable<string> files, CancellationToken token);
+    string GetContentType(string fileName);
 }
