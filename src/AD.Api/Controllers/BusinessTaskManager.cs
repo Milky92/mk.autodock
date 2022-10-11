@@ -1,11 +1,7 @@
-using AD.Api.Attributes;
+using AD.Api.Consts;
 using AD.Business.Features.CreateBusinessTask;
 using AD.Business.Features.DeleteBusinessTask;
-using AD.Business.Features.DeleteFile;
-using AD.Business.Features.GetFile;
 using AD.Business.Features.UpdateBusinessTask;
-using AD.Business.Features.UploadFiles;
-using AD.Business.Models.Dto;
 using AD.Business.Models.Requests;
 using AD.Business.Models.Responses;
 using AD.Commons;
@@ -32,13 +28,15 @@ public class BusinessTaskManager : ControllerBase
     /// <param name="token"></param>
     /// <returns></returns>
     [HttpPost("/task/create")]
+    [DisableRequestSizeLimit,
+     RequestFormLimits(MultipartBodyLengthLimit = int.MaxValue, ValueLengthLimit = RequestLimits.UploadLimit)]
     [ProducesResponseType(typeof(Result<CreateBusinessTaskResponse>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> CreateBusinessTask([FromBody] BusinessTaskRequest request,
+    public async Task<IActionResult> CreateBusinessTask([FromForm] CreateBusinessTaskRequest request,
         CancellationToken token)
     {
-        var res = await _mediator.Send(request.Adapt<CreateBusinessTaskCommand>(), token);
+        var res = await _mediator.Send(request.Adapt<CreateBusinessTaskCommand>().WithFiles(request.Files), token);
         return StatusCode(res.StatusCode, res);
     }
 

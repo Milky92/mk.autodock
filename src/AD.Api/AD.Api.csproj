@@ -27,4 +27,8 @@
       <ProjectReference Include="..\AD.Persistence.DataAccess\AD.Persistence.DataAccess.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Uploads" />
+    </ItemGroup>
+
 </Project>

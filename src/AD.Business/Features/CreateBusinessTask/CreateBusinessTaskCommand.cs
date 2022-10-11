@@ -6,7 +6,18 @@ using Microsoft.AspNetCore.Http;
 
 namespace AD.Business.Features.CreateBusinessTask;
 
-public class CreateBusinessTaskCommand:IRequest<Result<CreateBusinessTaskResponse>>
+public class CreateBusinessTaskCommand : IRequest<Result<CreateBusinessTaskResponse>>
 {
     public string Name { get; set; }
+    
+    public FileInfo FileInfo { get; private set; }
+
+    public CreateBusinessTaskCommand WithFiles(IFormFileCollection files)
+    {
+        FileInfo = new FileInfo(files);
+        
+        return this;
+    }
 }
+
+public record FileInfo(IFormFileCollection Files);

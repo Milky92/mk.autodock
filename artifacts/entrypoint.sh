@@ -3,7 +3,7 @@
 set -e
 run_cmd="dotnet run --server.urls http://*:5188"
 
-until dotnet ef database update --project AD.Persistence.DataAccess; do
+until dotnet ef database update --project AD.Persistence.DataAccess -s AD.APi; do
 >&2 echo "SQL Server is starting up"
 sleep 1
 done
