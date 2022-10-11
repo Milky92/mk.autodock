@@ -5,6 +5,7 @@ using AD.Business.Models.Requests;
 using AD.Commons;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace AD.Api.Controllers;
 
@@ -25,7 +26,8 @@ public class BusinessTaskController : ControllerBase
     /// <param name="request"></param>
     /// <param name="token"></param>
     /// <returns></returns>
-    [HttpPost("/page")]
+    [HttpPost("page")]
+    [SwaggerOperation(Summary = "Get tasks")]
     [ProducesResponseType(typeof(PagedResult<BusinessTaskItemGridDto>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -44,6 +46,7 @@ public class BusinessTaskController : ControllerBase
     /// <param name="token"></param>
     /// <returns></returns>
     [HttpPost("{id:int}")]
+    [SwaggerOperation(Summary = "Get detail task")]
     [ProducesResponseType(typeof(Result<BusinessTaskDto>), 200)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

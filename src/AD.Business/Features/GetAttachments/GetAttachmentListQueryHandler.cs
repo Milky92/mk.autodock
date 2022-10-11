@@ -27,14 +27,20 @@ public class GetAttachmentListQueryHandler : IRequestHandler<GetAttachmentListQu
         try
         {
             var total = await _dbContext.Attachments.CountAsync(cancellationToken);
-            
+
+            if (total <= 0)
+            {
+                return PagedResult<AttachmentGridItemDto>.Ok(new List<AttachmentGridItemDto>(),
+                    request.Context.PageIndex, request.Context.CountOnPage, total);
+            }
+
             var attachments = _dbContext.Attachments
                 .Include(at => at.BusinessTask)
                 .AsQueryable();
 
             if (request.Context.Filter != null)
                 attachments = attachments.Where(GetPredicate(request.Context.Filter));
-            
+
             var resList = await attachments
                 .Select(at => new AttachmentGridItemDto
                 {
@@ -68,9 +74,8 @@ public class GetAttachmentListQueryHandler : IRequestHandler<GetAttachmentListQu
 
         Expression<Func<BusinessTaskAttachment, bool>> expression = x =>
             filter.TaskId == null || x.BusinessTaskId == filter.TaskId &&
-            string.IsNullOrEmpty(filter.ContentType) || x.ContentType == filter.ContentType &&
-            string.IsNullOrEmpty(filter.TaskName) || x.BusinessTask.Name == filter.TaskName.Trim();
-
+            string.IsNullOrEmpty(filter.ContentType) || x.ContentType == filter.ContentType;
+        
         return expression;
     }
 }

@@ -7,7 +7,7 @@ using AD.Business.Models.Requests;
 using AD.Commons;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace AD.Api.Controllers;
 [ApiController]
@@ -22,22 +22,25 @@ public class AttachmentsController:ControllerBase
         _mediator = mediator;
     }
 
+    [HttpPost("page")]
+    [SwaggerOperation(Summary = "Get attachments")]
     [ProducesResponseType(typeof(PagedResult<AttachmentGridItemDto>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> Page(PageContext<AttachmentListFilter> context,CancellationToken token)
+    public async Task<IActionResult> GetPage(PageContext<AttachmentListFilter> context,CancellationToken token)
     {
         var res = await _mediator.Send(new GetAttachmentListQuery(context), token);
         return StatusCode(res.StatusCode, res);
     }
 
     /// <summary>
-    /// Attachment file into business task.
+    /// Attach file into business task.
     /// </summary>
     /// <param name="taskId"></param>
     /// <param name="token"></param>
     /// <returns></returns>
-    [HttpPost("/task/{taskId:int}/attachment")]
+    [HttpPost("task/{taskId:int}/attachment")]
+    [SwaggerOperation(Summary = "Attach to task")]
     [Consumes("multipart/form-data")]
     [DisableRequestSizeLimit,
      RequestFormLimits(MultipartBodyLengthLimit = UploadSizeLimit, ValueLengthLimit = UploadSizeLimit)]
@@ -65,6 +68,7 @@ public class AttachmentsController:ControllerBase
     /// <param name="token"></param>
     /// <returns></returns>
     [HttpGet("task/{taskId:int}/attachment/{attachmentId:int}")]
+    [SwaggerOperation(Summary = "Download attachment file")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -87,6 +91,7 @@ public class AttachmentsController:ControllerBase
     /// <param name="token">cancellation toke</param>
     /// <returns></returns>
     [HttpDelete("task/{taskId:int}/attachment/{attachmentId:int}")]
+    [SwaggerOperation(Summary = "Delete attachment")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
