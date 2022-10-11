@@ -33,9 +33,4 @@
       <ProjectReference Include="..\AD.Persistence.DataAccess\AD.Persistence.DataAccess.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Features\GetFile" />
-      <Folder Include="Features\GetFiles" />
-    </ItemGroup>
-
 </Project>
