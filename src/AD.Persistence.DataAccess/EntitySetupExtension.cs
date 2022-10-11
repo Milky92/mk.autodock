@@ -20,14 +20,14 @@ public static class EntitySetupExtension
 
     private static ModelBuilder SetupBusinessTaskAttachment(this ModelBuilder modelBuilder, AppDbContext context)
     {
-        modelBuilder.Entity<BusinessTask>().OwnsMany(entity => entity.Attachments, builder =>
-        {
-            builder.ToTable(nameof(context.Attachments));
-            builder.HasKey(a => a.Id);
-            builder.HasOne(e => e.BusinessTask)
-                .WithMany(e => e.Attachments)
-                .HasForeignKey(e => e.BusinessTaskId);
-        });
+        modelBuilder.Entity<BusinessTaskAttachment>().HasKey(t => t.Id);
+
+        modelBuilder.Entity<BusinessTaskAttachment>()
+            .HasOne(t=>t.BusinessTask)
+            .WithMany(t=>t.Attachments)
+            .HasForeignKey(at => at.BusinessTaskId)
+            .IsRequired()
+            .OnDelete(DeleteBehavior.Cascade);
 
         return modelBuilder;
     }

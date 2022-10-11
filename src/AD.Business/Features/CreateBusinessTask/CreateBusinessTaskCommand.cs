@@ -9,13 +9,4 @@ namespace AD.Business.Features.CreateBusinessTask;
 public class CreateBusinessTaskCommand:IRequest<Result<CreateBusinessTaskResponse>>
 {
     public string Name { get; set; }
-    public BusinessTaskStatus Status { get; set; }
-    
-    public IFormFileCollection Attachment { get; private set; }
-
-    public CreateBusinessTaskCommand WithFiles(IFormFileCollection attachment)
-    {
-        Attachment = attachment;
-        return this;
-    }
 }

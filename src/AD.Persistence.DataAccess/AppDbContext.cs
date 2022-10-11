@@ -12,17 +12,14 @@ public class AppDbContext : DbContext
     
     public DbSet<BusinessTask> BusinessTasks { get; set; }
     public DbSet<BusinessTaskAttachment> Attachments { get; set; }
-
-
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        base.OnModelCreating(modelBuilder);
-
         modelBuilder.HasDefaultSchema("db_public");
         
         modelBuilder.Setup(this);
         
-        modelBuilder.Seed();
+        base.OnModelCreating(modelBuilder);
     }
     
 }

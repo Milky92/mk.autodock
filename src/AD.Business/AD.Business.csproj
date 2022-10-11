@@ -9,7 +9,13 @@
       <PackageReference Include="Mapster" Version="7.3.0" />
       <PackageReference Include="MediatR" Version="11.0.0" />
       <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+      <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.9" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Features" Version="6.0.9" />
+      <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
     </ItemGroup>
 
     <ItemGroup>
@@ -25,11 +31,6 @@
       <ProjectReference Include="..\AD.Business.Services\AD.Business.Services.csproj" />
       <ProjectReference Include="..\AD.Commons\AD.Commons.csproj" />
       <ProjectReference Include="..\AD.Persistence.DataAccess\AD.Persistence.DataAccess.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Features\GetFile" />
-      <Folder Include="Features\GetFiles" />
     </ItemGroup>
 
 </Project>

@@ -19,10 +19,16 @@ public class BusinessTaskController : ControllerBase
         _mediator = mediator;
     }
 
+    /// <summary>
+    /// Grid business task.
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="token"></param>
+    /// <returns></returns>
     [HttpPost("/page")]
-    [ProducesResponseType(typeof(PagedResult<BusinessTaskItemGridDto>), 200)]
-    [ProducesResponseType(400)]
-    [ProducesResponseType(500)]
+    [ProducesResponseType(typeof(PagedResult<BusinessTaskItemGridDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> Page([FromBody] PageContext<GetBusinessTasksFiler> request,
         CancellationToken token)
     {
@@ -30,12 +36,18 @@ public class BusinessTaskController : ControllerBase
 
         return StatusCode(res.StatusCode, res);
     }
-
+    
+    /// <summary>
+    /// Details data for business task
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="token"></param>
+    /// <returns></returns>
     [HttpPost("{id:int}")]
     [ProducesResponseType(typeof(Result<BusinessTaskDto>), 200)]
-    [ProducesResponseType(404)]
-    [ProducesResponseType(400)]
-    [ProducesResponseType(500)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> Details([FromRoute] int id, CancellationToken token)
     {
         var res = await _mediator.Send(new GetDetailsBusinessTaskQuery { Id = id }, token);
