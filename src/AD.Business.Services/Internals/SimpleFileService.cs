@@ -18,9 +18,31 @@ public class SimpleFileService : IFileService
         _fileStorageSettings = options.Value ?? throw new ArgumentNullException(nameof(FileStorageSettings));
     }
 
-    public Task<List<string>> SaveRange(IFormFileCollection files, CancellationToken token)
+    public string GetContentType(string fileName) => GetMimeType(fileName);
+
+    public async Task<bool> SaveRange(IFormFileCollection files, CancellationToken token)
     {
-        throw new NotImplementedException();
+        //   bool hasSave = false;
+        // if (!DirectoryHelper.CreateIfNotExists(_fileStorageSettings.PathToUpload))
+        // {
+        //     _logger.LogWarning("Could not create directory by specified path. {PathToUpload}",
+        //         _fileStorageSettings.PathToUpload);
+        //     return default;
+        // }
+        // files.AsParallel().ForAll(f =>
+        // {
+        //     
+        //     
+        //     
+        // });
+
+        foreach (var file in files)
+        {
+            var res = await SaveSingle(file, token);
+            if (string.IsNullOrEmpty(res)) return false;
+        }
+
+        return true;
     }
 
     public async Task<string> SaveSingle(IFormFile file, CancellationToken token)
@@ -78,7 +100,7 @@ public class SimpleFileService : IFileService
             return (default, default);
         }
     }
-    
+
     public async Task<bool> DeleteFile(string fileName, CancellationToken token)
     {
         try
@@ -96,7 +118,7 @@ public class SimpleFileService : IFileService
         }
         catch (Exception e)
         {
-            _logger.LogError(e,"Could not delete file form disc.");
+            _logger.LogError(e, "Could not delete file form disc.");
             return false;
         }
     }
@@ -108,7 +130,7 @@ public class SimpleFileService : IFileService
             if (File.Exists(f))
                 File.Delete(f);
         });
-        
+
         return true;
     }
 

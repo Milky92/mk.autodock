@@ -28,12 +28,20 @@ public class
     {
         try
         {
+            var total = await _dbContext.BusinessTasks.CountAsync(cancellationToken);
+            
+            if (total <= 0)
+            {
+                return PagedResult<BusinessTaskItemGridDto>.Ok(new List<BusinessTaskItemGridDto>(),
+                    request.Context.PageIndex, request.Context.CountOnPage, total);
+            }
+            
             var bTasks = _dbContext.BusinessTasks.AsQueryable();
 
             if (request.Context.Filter != null)
                 bTasks = bTasks.Where(GetPredicate(request.Context.Filter));
 
-            var total = await _dbContext.BusinessTasks.CountAsync(cancellationToken);
+          
 
             var resList = await bTasks
                 .Skip((request.Context.PageIndex - 1) * request.Context.CountOnPage)
