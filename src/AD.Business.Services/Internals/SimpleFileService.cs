@@ -18,6 +18,8 @@ public class SimpleFileService : IFileService
         _fileStorageSettings = options.Value ?? throw new ArgumentNullException(nameof(FileStorageSettings));
     }
 
+   public string GetContentType(string fileName) => GetMimeType(fileName);
+    
     public Task<List<string>> SaveRange(IFormFileCollection files, CancellationToken token)
     {
         throw new NotImplementedException();

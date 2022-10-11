@@ -69,7 +69,12 @@ public class UploadFilesCommandHandler : IRequestHandler<UploadFilesCommand, Res
                 return Result<AttachmentDto>.NotFound("Task not found.");
             }
 
-            var attachment = new BusinessTaskAttachment { Name = request.File.FileName, BusinessTaskId = bTask.Id, };
+            var attachment = new BusinessTaskAttachment
+            {
+                Name = request.File.FileName,
+                BusinessTaskId = bTask.Id,
+                ContentType = _fileService.GetContentType(request.File.FileName)
+            };
 
             await _dbContext.Attachments.AddAsync(attachment, cancellationToken);
 
